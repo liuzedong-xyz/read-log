@@ -51,10 +51,7 @@ app.get('/qq', (req, res) => {
       });
     }
   })
-
   // /home/log/lumen_log/201909/blog_api_site_SiteController.log
-
-
 })
 
 
