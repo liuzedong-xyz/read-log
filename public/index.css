@@ -28,7 +28,7 @@ button, input {
 
 .main-wrapper {
   max-width: 820px;
-  margin: 20px auto 0;
+  margin: 20px auto 50px;
   padding: 20px;
   background-color: #ffffff;
   -webkit-box-shadow: 0 2px 12px 0 rgba(0,0,0,.15);
@@ -97,4 +97,51 @@ button, input {
   line-height: 30px;
 }
 
+.show ul {
+  list-style-type: none;
+  color: #575757;
+}
+
+.show ul li {
+  background-color: #f8eded;
+  padding: 0 10px;
+  border-radius: 5px;
+  margin-bottom: 10px;
+  word-break: break-all;
+  cursor: pointer;
+}
+
+.show ul li:hover {
+  background-color: #f5d8d8;
+}
+
+.show ul li.change div{
+  display: block;
+  height: auto;
+}
+
+.show ul li div {
+  height: 0;
+  display: none;
+  border-top: 1px solid black;
+  padding-top: 5px;
+  white-space: pre-wrap;
+  overflow: hidden;
+  transition: .3s;
+}
+
+.show ul li div i {
+  display: inline-block;
+  padding: 0 3px;
+  background-color: #e08eda;
+  border-radius: 5px;
+  margin-bottom: 5px;
+  color: #fff;
+  font-style: normal;
+}
+
+.num {
+  font-size: 13px;
+  vertical-align: sub;
+}
 
