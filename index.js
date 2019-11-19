@@ -9,24 +9,51 @@ const fs = require('fs');
 // app.use(express.static('public'));
 
 app.get('/qq', (req, res) => {
+  // 搜索条件
+  let search = req.query.val;
 
+  search = search.replace(/__/g, '/');
 
-  const rl = readline.createInterface({
-      input: fs.createReadStream('/home/log/lumen_log/201909/blog_api_site_SiteController.log')
-  });
+  fs.exists(search, exist => {
+    // 如果文件存在
+    if(exist) {
+      try {
+        const rl = readline.createInterface({
+          input: fs.createReadStream(search)
+        });
+    
+        let result = [];
+        rl.on('line', (line) => {
+            result.unshift(JSON.parse(line));
+        });
+                
+        rl.on('close', ()=> {
+            res.json({
+              code: 0,
+              data: result,
+              msg: 'ok'
+            });
+        });
+      }
+      catch(e) {
+        res.json({
+          code: -1,
+          data: e,
+          msg: 'error'
+        });
+      }
+    }
+    else {
+      res.json({
+        code: -1,
+        data: [],
+        msg: '路径错误或文件不存在！'
+      });
+    }
+  })
 
-  let result = [];
-  rl.on('line', (line) => {
-      // console.log(line)
-      // console.log(JSON.parse(line));
-      // result += line;
-      result.push(JSON.parse(line));
-  });
-          
-  rl.on('close', ()=> {
-      // console.log('closed')
-      res.json(result);
-  });
+  // /home/log/lumen_log/201909/blog_api_site_SiteController.log
+
 
 })
 
