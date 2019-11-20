@@ -1,45 +1,40 @@
 const express = require('express')
 const path = require('path')
 const app = express()
-
-const readline = require('readline');
 const fs = require('fs');
+
+const getlogs = require('./module/getLog.js');
 
 
 // app.use(express.static('public'));
 
 app.get('/qq', (req, res) => {
   // 搜索条件
-  let search = req.query.val;
+  let path = req.query.val;
 
-  search = search.replace(/__/g, '/');
+  let searcharr = JSON.parse(req.query.arr);
 
-  fs.exists(search, exist => {
+  // console.log(searcharr);
+
+  path = path.replace(/__/g, '/');
+
+  fs.exists(path, async exist => {
     // 如果文件存在
     if(exist) {
-      try {
-        const rl = readline.createInterface({
-          input: fs.createReadStream(search)
-        });
-    
-        let result = [];
-        rl.on('line', (line) => {
-            result.unshift(JSON.parse(line));
-        });
-                
-        rl.on('close', ()=> {
-            res.json({
-              code: 0,
-              data: result,
-              msg: 'ok'
-            });
-        });
-      }
-      catch(e) {
+      let { result } = await getlogs(path, searcharr);
+
+      if(result == -1) {
         res.json({
           code: -1,
-          data: e,
-          msg: 'error'
+          data: [],
+          msg: '查找失败'
+        });
+      }
+      else {
+        res.json({
+          code: 0,
+          data: result,
+          msg: ''
         });
       }
     }

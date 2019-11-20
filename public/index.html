@@ -16,15 +16,28 @@
     <div class="main-wrapper">
       <div class="main">
         <div class="search">
-          <label for="input">
-            路径：<input type="text" class="search-input" id="search">
-          </label>
-          <button class="search-btn" id="search-btn">搜索</button>
+          <div>
+            <label for="input">
+              路径：<input type="text" class="search-input" id="search" >
+              <!-- value="/home/log/lumen_log/201909/qqq.log" -->
+            </label>
+          </div>
 
-          <span class="num" id="num"></span>
+          <div class="more-search">
+            <div class="more-search-area" id="more-search">
+
+            </div>
+            <button class="search-btn yellow" id="add-more">添加搜索条件</button>
+            <button class="search-btn red" id="delete-more">删除搜索条件</button>
+            <button class="search-btn blue" id="search-btn">搜索</button>
+
+            <span class="num" id="num"></span>
+          </div>
         </div>
 
-        <div class="show" id="show"></div>
+        <div class="show" id="show">
+          <p class="tip">点击搜索哦～</p>
+        </div>
       </div>
     </div>
   </div>
